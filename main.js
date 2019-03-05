@@ -57,4 +57,11 @@ for(const prop in p){
 }
 console.log(`Object own properties: ${prototypeProps}`);
 
-// Object Oriented Programming: Understand the Constructor Property
+// the constructor Property
+function Citizen(name){
+    this.name = name;
+}
+
+const myCitizen = new Citizen('John');
+
+console.log(myCitizen.constructor == Citizen);
