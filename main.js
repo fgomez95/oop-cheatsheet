@@ -65,3 +65,26 @@ function Citizen(name){
 const myCitizen = new Citizen('John');
 
 console.log(myCitizen.constructor == Citizen);
+
+// multiple prototype properties
+
+Citizen.prototype = {
+    constructor: Citizen, /* always add the constructor to the prototype object */
+    country: 'Germany',
+    getPassportNumber: function(){
+        return this.passport;
+    },
+    passport: Math.floor((Math.random() * 10000000) + 1),
+}
+
+const c1 = new Citizen('Joe');
+console.log(c1.getPassportNumber(), c1.name, c1.constructor);
+
+// type of object property
+
+/* since myCitizen was instanciated before the object was modified, 
+   is not the same type anymore */
+console.log(`Citizen prototype? ${Citizen.prototype.isPrototypeOf(myCitizen)}`);
+console.log(`Citizen prototype? ${Citizen.prototype.isPrototypeOf(c1)}`);
+
+// Object Oriented Programming: Understand the Prototype Chain
