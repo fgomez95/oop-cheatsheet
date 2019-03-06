@@ -87,4 +87,24 @@ console.log(c1.getPassportNumber(), c1.name, c1.constructor);
 console.log(`Citizen prototype? ${Citizen.prototype.isPrototypeOf(myCitizen)}`);
 console.log(`Citizen prototype? ${Citizen.prototype.isPrototypeOf(c1)}`);
 
-// Object Oriented Programming: Understand the Prototype Chain
+// Inheritance
+
+function Vehicle(plate) { this.plate = plate; }
+Vehicle.prototype = {
+    constructor: Vehicle,
+    start: function(){
+        console.log('brrrummmm');
+    },
+    getPlate: function(){
+        if(this.plate) return this.plate;
+        this.setPlate('use setPlate to set a new plate');
+        return this.getPlate();
+    },
+    setPlate(plate){
+        this.plate = plate;
+    }
+}
+
+const myCar = Object.create(Vehicle.prototype);
+myCar.start();
+console.log(myCar.getPlate());
