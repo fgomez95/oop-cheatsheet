@@ -107,4 +107,26 @@ Vehicle.prototype = {
 
 const myCar = Object.create(Vehicle.prototype);
 myCar.start();
+myCar.setPlate('10ERRT');
 console.log(myCar.getPlate());
+
+// child's prototype to an instance of parent
+
+function Car() { }
+Car.prototype = Object.create(Vehicle.prototype);
+const myNewCar = new Car();
+myNewCar.setPlate('8080RRP');
+console.log(myNewCar.getPlate());
+
+// overwrite parent's methods
+
+function Bike() { }
+Bike.prototype = Object.create(Vehicle.prototype);
+Bike.prototype.getPlate = function() { return 'not available D:'; }
+
+const myBike = new Bike();
+console.log(myBike.getPlate());
+
+// mixins 
+
+
