@@ -146,3 +146,7 @@ function Account(){
 let myAccount = new Account();
 console.log("this should not be available: ", myAccount.accNumber);
 console.log("this should: ", myAccount.getAccountNumber());
+
+// immediately invoked function
+(function(){ console.log('ES5 :)'); })();
+(() => (console.log("ES6 executed immediately and no name")))();
