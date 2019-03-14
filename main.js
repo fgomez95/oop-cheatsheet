@@ -128,5 +128,10 @@ const myBike = new Bike();
 console.log(myBike.getPlate());
 
 // mixins 
+let colorMixin = function(obj, color){
+    obj.color = color;
+}
 
+colorMixin(myBike, 'red');
+console.log(myBike.color);
 
