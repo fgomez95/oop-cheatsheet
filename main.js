@@ -87,4 +87,66 @@ console.log(c1.getPassportNumber(), c1.name, c1.constructor);
 console.log(`Citizen prototype? ${Citizen.prototype.isPrototypeOf(myCitizen)}`);
 console.log(`Citizen prototype? ${Citizen.prototype.isPrototypeOf(c1)}`);
 
-// Object Oriented Programming: Understand the Prototype Chain
+// Inheritance
+
+function Vehicle(plate) { this.plate = plate; }
+Vehicle.prototype = {
+    constructor: Vehicle,
+    start: function(){
+        console.log('brrrummmm');
+    },
+    getPlate: function(){
+        if(this.plate) return this.plate;
+        this.setPlate('use setPlate to set a new plate');
+        return this.getPlate();
+    },
+    setPlate(plate){
+        this.plate = plate;
+    }
+}
+
+const myCar = Object.create(Vehicle.prototype);
+myCar.start();
+myCar.setPlate('10ERRT');
+console.log(myCar.getPlate());
+
+// child's prototype to an instance of parent
+
+function Car() { }
+Car.prototype = Object.create(Vehicle.prototype);
+const myNewCar = new Car();
+myNewCar.setPlate('8080RRP');
+console.log(myNewCar.getPlate());
+
+// overwrite parent's methods
+
+function Bike() { }
+Bike.prototype = Object.create(Vehicle.prototype);
+Bike.prototype.getPlate = function() { return 'not available D:'; }
+
+const myBike = new Bike();
+console.log(myBike.getPlate());
+
+// mixins 
+let colorMixin = function(obj, color){
+    obj.color = color;
+}
+
+colorMixin(myBike, 'red');
+console.log(myBike.color);
+
+// closures to protect object attributes
+function Account(){
+    let accNumber = 100057892234;
+    this.getAccountNumber = function(){
+        return accNumber;
+    }
+}
+
+let myAccount = new Account();
+console.log("this should not be available: ", myAccount.accNumber);
+console.log("this should: ", myAccount.getAccountNumber());
+
+// immediately invoked function
+(function(){ console.log('ES5 :)'); })();
+(() => (console.log("ES6 executed immediately and no name")))();
