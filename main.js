@@ -135,3 +135,14 @@ let colorMixin = function(obj, color){
 colorMixin(myBike, 'red');
 console.log(myBike.color);
 
+// closures to protect object attributes
+function Account(){
+    let accNumber = 100057892234;
+    this.getAccountNumber = function(){
+        return accNumber;
+    }
+}
+
+let myAccount = new Account();
+console.log("this should not be available: ", myAccount.accNumber);
+console.log("this should: ", myAccount.getAccountNumber());
