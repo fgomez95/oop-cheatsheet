@@ -148,5 +148,38 @@ console.log("this should not be available: ", myAccount.accNumber);
 console.log("this should: ", myAccount.getAccountNumber());
 
 // immediately invoked function
-(function(){ console.log('ES5 :)'); })();
+(function() { console.log('ES5 :)'); })();
 (() => (console.log("ES6 executed immediately and no name")))();
+
+// modules with IIFE
+const apiModule = (function(){
+    return {
+        getDataMixin: function(obj){
+            obj.getMessage = function(){
+                return {
+                    id: this.id,
+                    data: ['hello', 'world']
+                };
+            };
+        },
+        postDataMixin: function(obj){
+            obj.postMessage = function(){
+                return {
+                    id: this.id,
+                    status: 'SUCCESS',
+                };
+            };
+        }
+    };
+})();
+
+function Messenger(id){
+    this.id = id;
+}
+
+const myMessenger = new Messenger(10);
+apiModule.getDataMixin(myMessenger);
+apiModule.postDataMixin(myMessenger);
+console.log(myMessenger.getMessage());
+console.log(myMessenger.postMessage());
+
